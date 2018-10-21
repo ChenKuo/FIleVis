@@ -1,30 +1,29 @@
 <template>
-  <div id="app">
+  <div id="app" >
     <TopBar id="topbar"/>
     <SegmentList id="seglist"/>
-    <HexViewer id="seghex"/>
-    <DecodeViewer id="segdecode"/>
-    <HexViewer id="selecthex"/>
-    <DecodeViewer id="selectdecode"/>
-    <ScrollView id="scrollview"/>
+    <SegmentView id="segview"/>
+    <SelectionView id="selview"/>
   </div>
 </template>
 
 <script>
 import TopBar from './components/TopBar'
 import SegmentList from './components/SegmentList'
-import HexViewer from './components/HexViewer'
-import DecodeViewer from './components/DecodeViewer'
-import ScrollView from './components/ScrollView'
+import SegmentView from './components/SegmentView'
+import SelectionView from './components/SelectionVIew'
+
 
 export default {
   name: 'App',
   components: {
     TopBar,
-    HexViewer,
-    DecodeViewer,
+    SegmentView,
+    SelectionView,
     SegmentList,
-    ScrollView
+  },
+  methods:{
+
   }
 }
 </script>
@@ -41,17 +40,18 @@ html,body{
   vertical-align: baseline;
   background: transparent;
   display:inline-block;
+  overflow: hidden;
   }
 
 #app {
   position:fixed;
   display:inline-grid;
-  grid-template-columns: 200px auto auto 100px;
-  grid-template-rows: 50px auto auto;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: 50px 1fr 1fr;
   grid-template-areas:
-    "header header header header"
-    "seglist seghex segdecode segscroll"
-    "seglist selecthex selectdecode segscroll";
+    "header header "
+    "seglist segview"
+    "seglist selview";
   width:100%;
   height:100%;
   margin:0;
@@ -69,25 +69,15 @@ html,body{
   background-color: black; 
   grid-area: seglist;
 }
-#seghex{
+#segview{
   background-color: green; 
-  grid-area: seghex;
+  grid-area: segview;
 }
-#segdecode{
+#selview{
   background-color: blue; 
-  grid-area: segdecode;
+  grid-area: selview;
 }
-#selecthex{
-  background-color: red; 
-  grid-area: selecthex
-}
-#selectdecode{
-  background-color: yellow;
-  grid-area: selectdecode;
-}
-#scrollview{
-  background-color: purple; 
-  grid-area: segscroll;
-}
+
+
 
 </style>
