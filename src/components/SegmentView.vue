@@ -1,7 +1,7 @@
 <template>
   <div class="seg_view" @wheel="handleScroll" ref="element">
       <HexViewer :rowOffsets="rowOffsets"/>
-      <DecodeViewer/>
+      <DecodeViewer :rowOffsets="rowOffsets"/>
   </div>
 </template>
 
@@ -24,6 +24,10 @@ export default {
         handleScroll(evt){
             let delta=evt.deltaY;
             let direction = Math.sign(delta);
+            let scrollRow = this.$store.state.segmentScrollRow;
+            let totalRow = this.$store.state.currentSegment.length/128;
+            if(scrollRow+direction<0||totalRow-scrollRow < this.numRows ) return null;
+            
             this.$store.commit("scrollSegment",{direction});
         },
         setNumRows(){
@@ -38,7 +42,7 @@ export default {
         },
         rowOffsets(){
            return [...Array(this.numRows)].map(
-               (val,idx)=>Math.floor(Math.floor(this.currentTopRow))+idx
+               (val,idx)=>(Math.floor(this.currentTopRow)+idx)
            )
        }
     },

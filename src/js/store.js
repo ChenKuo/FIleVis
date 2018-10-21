@@ -9,10 +9,11 @@ const newSegment = (startBit,len)=>{
     }
 }
 
-const newFile = (name,data)=>{
+const newFile = (name,data,size)=>{
     return {
         name:name,
-        data:data
+        data:data,
+        size:size
     }
 }
 
@@ -55,9 +56,9 @@ const actions={
 };
 
 const mutations={
-    loadFile(state,{filename,buffer}){
-        state.file=newFile(filename,buffer);
-        state.segments=[newSegment(0,buffer.length)];
+    loadFile(state,{filename,buffer,size}){
+        state.file=newFile(filename,new DataView(buffer,0,size),size);
+        state.segments=[newSegment(0,size)];
         state.currentSegment=state.segments[0]
     },
     addSegment(state,{startBit,bitLen}){
@@ -76,7 +77,7 @@ const mutations={
 
     },
     scrollSegment(state,{direction}){
-        state.segmentScrollRow += direction;
+        state.segmentScrollRow = state.segmentScrollRow + direction;
     },
     scrollSelection(state,{direction}){
 

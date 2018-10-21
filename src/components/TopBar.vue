@@ -19,7 +19,7 @@ export default {
             let reader = new FileReader();
             reader.onload=(e)=>{
                 let result=e.target.result;
-                this.$store.commit("loadFile",{filename:file.name,buffer:result});
+                this.$store.commit("loadFile",{filename:file.name,buffer:result,size:file.size});
             }
             reader.readAsArrayBuffer(file);
         }

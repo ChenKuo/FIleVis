@@ -1,6 +1,6 @@
 <template>
   <div @wheel="handleScroll" class="sel_view">
-      <HexViewer/>
+      <HexViewer />
       <DecodeViewer/>
   </div>
 </template>

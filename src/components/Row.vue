@@ -1,7 +1,7 @@
 <template>
   <div class="row">
-      <div class="row_label"></div>
-      <Byte class="byte" v-for="offset in bytes" :key="offset" :offset="offset"/>
+      <div class="row_label">{{rowLabel}}</div>
+      <Byte class="byte" v-for="offset in bytes" :key="offset" :offset="offset" :mode="mode"/>
   </div>
 </template>
 
@@ -13,13 +13,23 @@ const byteSize = 8;
 export default {
     name: 'row',
     props:{
-        offset:{type:Number,required:true}
+        //bits
+        offset:{type:Number,required:true},
+        mode:String
     },
     computed:{
         bytes(){
            return [...Array(16)].map(
-               (val,idx)=>this.offset+(8*idx)
+               (val,idx)=>this.offset*128+(8*idx)
             );
+        },
+        rowIndex(){
+            let scrollRow = this.$store.state.segmentScrollRow;
+            return scrollRow+this.offset>>3;
+        },
+        rowLabel(){
+            let str = "0000"+(Number(this.offset*16).toString(16).toUpperCase());
+            return str.substring(str.length-4);
         }
     },
     components:{
