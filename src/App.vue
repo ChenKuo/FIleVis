@@ -70,11 +70,11 @@ html,body{
   grid-area: seglist;
 }
 #segview{
-  background-color: green; 
+  background-color: white; 
   grid-area: segview;
 }
 #selview{
-  background-color: blue; 
+  background-color: white; 
   grid-area: selview;
 }
 

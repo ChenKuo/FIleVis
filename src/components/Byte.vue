@@ -1,6 +1,6 @@
 <template>
-  <div class="byte">
-      {{mode?ASCII:byte}}
+  <div class="byte" :style="computedStyle">
+      {{mode?ASCII:strByte}}
   </div>
 </template>
 
@@ -35,12 +35,17 @@ export default {
             return byte;
         },
         strByte(){
+            if(this.byte=="") return "";
             let stringByte = Number(this.byte).toString(16).toUpperCase();
             if(stringByte.length<2) stringByte="0"+stringByte;
             return stringByte;
         },
         ASCII(){
             return String.fromCharCode(Number(this.byte));
+        },
+        computedStyle(){
+            let byte=this.byte;
+            return "background-color: rgb("+[byte,byte,byte].join(",")+");";
         }
     },
     
@@ -48,10 +53,9 @@ export default {
 </script>
 
 <style>
-.row{
-    display:flex;
-    flex-direction: row;
-}
 
+.byte{
+    color:red;
+}
 
 </style>

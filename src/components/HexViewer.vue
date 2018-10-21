@@ -41,7 +41,7 @@ export default {
 }
 .column_label{
     width:25px;
-    background-color: darkolivegreen;
+    background-color: rgb(105, 160, 148);
 }
 .row_label{
     width:60px;

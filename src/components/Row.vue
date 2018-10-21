@@ -46,7 +46,7 @@ export default {
 }
 .row_label{
     width: 60px;
-    background-color: darkolivegreen;
+    background-color: rgb(105, 160, 148);
 }
 .byte{
     width:25px;
